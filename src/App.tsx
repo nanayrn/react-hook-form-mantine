@@ -2,13 +2,16 @@ import { MantineProvider } from "@mantine/core";
 import { BrowserRouter } from "react-router-dom";
 
 import AppRoutes from "@routes/Routes";
+import { ModalNotificationProvider } from "@contexts/ModalNotificationProvider";
 
 const App = () => {
   return (
     <MantineProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <ModalNotificationProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </ModalNotificationProvider>
     </MantineProvider>
   );
 };
