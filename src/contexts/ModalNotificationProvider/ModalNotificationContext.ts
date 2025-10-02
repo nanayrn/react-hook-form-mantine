@@ -6,7 +6,7 @@ export type ModalNotification = {
   color?: "red" | "green" | "blue" | "yellow";
 };
 
-export type ModalNotificationContextType = {
+type ModalNotificationContextType = {
   showModalNotification: (notification: ModalNotification) => void;
 };
 
