@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Container } from "@mantine/core";
+import { Button, Container, Title } from "@mantine/core";
 
 import { useModalNotification } from "@contexts/ModalNotificationProvider";
 
@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <Container>
-      <h1>Home Page</h1>
+      <Title order={1}>Home Page</Title>
       <Button
         onClick={() =>
           showModalNotification({
