@@ -1,46 +1,38 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { Button, Modal, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+
+import {
+  ModalNotificationContext,
+  type ModalNotification,
+} from "./ModalNotificationContext";
 
 type ModalNotificationProviderProps = {
   children: React.ReactNode;
 };
 
-type ModalNotification = {
-  title: string;
-  message: string;
-  color?: "red" | "green" | "blue" | "yellow";
-};
-
-type ModalNotificationContextType = {
-  showModalNotification: (notification: ModalNotification) => void;
-};
-
-const ModalNotificationContext = createContext<ModalNotificationContextType>({
-  showModalNotification: () => {},
-});
-
 const ModalNotificationProvider = (props: ModalNotificationProviderProps) => {
+  const [opened, { open, close }] = useDisclosure();
   const [notification, setNotification] = useState<ModalNotification | null>(
     null
   );
 
-  const showModalNotification = (notif: ModalNotification) => {
-    setNotification(notif);
+  const showModalNotification = (notification: ModalNotification) => {
+    setNotification(notification);
+    open();
   };
-
-  const closeModal = () => setNotification(null);
 
   return (
     <ModalNotificationContext.Provider value={{ showModalNotification }}>
       {props.children}
       <Modal
-        opened={!!notification}
-        onClose={closeModal}
+        opened={opened}
+        onClose={close}
         title={notification?.title}
         centered
       >
         <Text c={notification?.color}>{notification?.message}</Text>
-        <Button mt="md" fullWidth onClick={closeModal}>
+        <Button mt="md" onClick={close}>
           OK
         </Button>
       </Modal>
@@ -48,17 +40,4 @@ const ModalNotificationProvider = (props: ModalNotificationProviderProps) => {
   );
 };
 
-const useModalNotification = () => {
-  const context = useContext(ModalNotificationContext);
-
-  if (!context) {
-    throw new Error(
-      "useModalNotification must be used within a ModalNotificationProvider"
-    );
-  }
-
-  return context;
-};
-
-export { useModalNotification };
 export default ModalNotificationProvider;
