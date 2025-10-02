@@ -3,6 +3,8 @@ import type { MantineThemeOverride } from "@mantine/core";
 const paletteTheme: MantineThemeOverride = {
   primaryColor: "primary",
   primaryShade: 5,
+  autoContrast: true,
+  luminanceThreshold: 0.3,
   colors: {
     primary: [
       "hsl(37, 96%, 94%)",
@@ -63,18 +65,6 @@ const paletteTheme: MantineThemeOverride = {
       "hsl(6, 69%, 41%)",
       "hsl(6, 69%, 32%)",
       "hsl(6, 69%, 20%)",
-    ],
-    gray: [
-      "hsl(202, 16%, 92%)",
-      "hsl(202, 16%, 89%)",
-      "hsl(202, 16%, 82%)",
-      "hsl(202, 16%, 77%)",
-      "hsl(202, 16%, 69%)",
-      "hsl(202, 16%, 62%)",
-      "hsl(202, 16%, 55%)",
-      "hsl(202, 16%, 48%)",
-      "hsl(202, 16%, 33%)",
-      "hsl(202, 16%, 18%)",
     ],
   },
 };
